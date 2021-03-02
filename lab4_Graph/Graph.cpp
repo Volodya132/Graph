@@ -44,3 +44,31 @@ void Graph::printEdges()const
 		}
 	}
 }
+
+std::list<Vertex*> Graph::dfs(int key)
+{
+	Vertex* v = vertexes[key];
+	if (v)
+		return _dfs(v);
+
+	return std::list<Vertex*>();
+}
+
+std::list<Vertex*> Graph::_dfs(Vertex* v)
+{
+	std::list<Vertex* > visitedGroup;
+	v->visited = true;
+
+	visitedGroup.push_back(v);
+
+	for (Edge currentEdge : v->edges)
+	{
+		if (!currentEdge.v->visited)
+		{
+			for (Vertex* currentVertex : _dfs(currentEdge.v))
+				visitedGroup.push_back(currentVertex);
+		}
+	}
+
+	return visitedGroup;
+}

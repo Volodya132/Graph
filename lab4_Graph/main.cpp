@@ -25,5 +25,14 @@ int main()
 	graph.printVertexes();
 	graph.printEdges();
 
+	std::list<Vertex* > dfsGroup = graph.dfs(6);
+
+	std::cout << "Обхід в глибину: "<< std::endl;
+
+	for (Vertex* currentVertex : dfsGroup)
+	{
+		std::cout << currentVertex->key << std::endl;
+	}
+
 	return 0;
 }
