@@ -22,7 +22,7 @@ void Graph::addEdge(int v1, int v2)
 	Vertex* vertex2 = vertexes[v2];
 
 	Edge edge;
-
+	
 	edge.v = vertex2;
 	vertex1->edges.emplace_back(edge);
 
@@ -71,4 +71,48 @@ std::list<Vertex*> Graph::_dfs(Vertex* v)
 	}
 
 	return visitedGroup;
+}
+
+std::list<Vertex*> Graph::bfs(int key)
+{
+	std::list<Vertex*> visitedGroup;
+	visitedGroup.push_back(vertexes[key]);
+
+	std::list<Vertex*> queue;
+	vertexes[key]->visited = true;
+	queue.push_back(vertexes[key]);
+	
+	while (!queue.empty())
+	{
+		int currvertex = queue.front()->key;
+		for (Edge currentEdge : queue.front()->edges)
+		{
+			if (!currentEdge.v->visited)
+			{
+				currentEdge.v->visited = true;
+				queue.push_back(currentEdge.v);
+				visitedGroup.push_back(currentEdge.v);
+			}
+		}
+
+		queue.pop_front();
+	}
+
+	return visitedGroup;
+}
+
+void Graph::setNotVisited()
+{
+	for (std::pair<int, Vertex*> currentVertex : vertexes)
+	{
+		currentVertex.second->visited = false;
+	}
+}
+
+
+Graph::~Graph()
+{
+	for (auto currentVertex : vertexes) {
+		delete currentVertex.second;
+	}
 }

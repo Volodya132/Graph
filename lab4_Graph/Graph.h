@@ -8,7 +8,7 @@ class Graph
 {
 public:
 	Graph() {};
-	~Graph() {};
+	~Graph();
 
 	void addVertex(int key);
 	void printVertexes()const;
@@ -16,7 +16,11 @@ public:
 	void printEdges()const;
 
 	std::list<Vertex*> dfs(int key);
+	std::list<Vertex*> bfs(int key);
+
+	void setNotVisited();
 private:
+
 	std::map<int, Vertex*> vertexes;
 
 	std::list<Vertex*> _dfs(Vertex* v);

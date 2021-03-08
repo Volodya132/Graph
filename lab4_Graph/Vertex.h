@@ -16,5 +16,8 @@ struct Vertex {
 	Vertex(int key) : key(key)
 	{ }
 	
+
 	std::list<Edge> edges;
+
+
 };

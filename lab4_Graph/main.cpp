@@ -26,13 +26,21 @@ int main()
 	graph.printEdges();
 
 	std::list<Vertex* > dfsGroup = graph.dfs(6);
-
 	std::cout << "ќбх≥д в глибину: "<< std::endl;
-
 	for (Vertex* currentVertex : dfsGroup)
 	{
 		std::cout << currentVertex->key << std::endl;
 	}
+
+	graph.setNotVisited();
+
+	std::list<Vertex* > bfsGroup = graph.bfs(6);
+	std::cout << "ќбх≥д в ширину: " << std::endl;
+	for (Vertex* currentVertex : bfsGroup)
+	{
+		std::cout << currentVertex->key << std::endl;
+	}
+	
 
 	return 0;
 }
